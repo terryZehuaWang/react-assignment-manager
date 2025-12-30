@@ -1,12 +1,10 @@
+
 import React, { useState } from "react"
 //import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Semesters() {
     const navigate = useNavigate();
-    function handleGoToCourses() {
-        navigate("/courses");
-    }
     const [semesters, setSemesters] = useState(["Winter 2025 (Sample semester)"]);
     const [semesterName, setSemesterName] = useState("");
     function handleAddSemester(event) {
@@ -19,7 +17,14 @@ function Semesters() {
     }
 
     function handleGoToCourses(semester) {
-        navigate("/courses", { state: { semester } });
+
+        const semURIName = encodeURIComponent(semester
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "-"));
+
+        navigate(`/${semURIName}`, { state: { semester } });
+        //navigate("/courses", { state: { semester } });
     }
 
     return (

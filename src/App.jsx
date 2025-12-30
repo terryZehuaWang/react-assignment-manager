@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Semesters from './Semesters.jsx'
-import Courses from './Courses.jsx'
+import Semesters from './pages/Semesters.jsx'
+import Courses from './pages/Courses.jsx'
 import { Routes, Route } from "react-router-dom"
 
 function App() {

@@ -28,7 +28,6 @@ function Semesters() {
     }
 
     return (
-
         <div className="semestersPage">
             <div className="addSemester">
                 <input type="text"
@@ -41,15 +40,12 @@ function Semesters() {
                 {semesters.map((semester) => {
                     return (
                         <div>
-
                             <h2 onClick={() => { handleGoToCourses(semester) }}>
                                 {semester}</h2>
-
                         </div>
                     );
                 })}
             </div>
-
         </div >
     )
 }

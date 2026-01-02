@@ -1,20 +1,20 @@
-import React, { useState } from "react";
 
-function Add({ semesters, setSemesters, semesterName, setSemesterName }) {
-    function handleSemesterNameChange(event) {
-        setSemesterName(event.target.value);
+
+function Add({ setItems, itemName, setItemName }) {
+    function handleItemNameChange(event) {
+        setItemName(event.target.value);
     }
-    function handleAddSemester(event) {
-        setSemesters((prevSemesters) => [...prevSemesters, semesterName]);
-        console.log(semesters);
+    function handleAddItem() {
+        setItems((prevItems) => [...prevItems, itemName]);
+
     }
     return (
         <div className="add">
             <input type="text"
-                value={semesterName}
-                onChange={handleSemesterNameChange}>
+                value={itemName}
+                onChange={handleItemNameChange}>
             </input>
-            <button onClick={handleAddSemester}>Add Semester</button>
+            <button onClick={handleAddItem}>Add Semester</button>
         </div>
     )
 }

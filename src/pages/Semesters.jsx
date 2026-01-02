@@ -24,11 +24,11 @@ function Semesters() {
 
     return (
         <div className="semestersPage">
-            <Add semesters={semesters} setSemesters={setSemesters} semesterName={semesterName} setSemesterName={setSemesterName} />
+            <Add setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />
             <div className="semesterDisplayBlock">
-                {semesters.map((semester) => {
+                {semesters.map((semester, idx) => {
                     return (
-                        <div>
+                        <div key={idx}>
                             <h2 onClick={() => { handleGoToCourses(semester) }}>
                                 {semester}</h2>
                         </div>

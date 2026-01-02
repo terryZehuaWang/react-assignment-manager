@@ -1,18 +1,23 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Add from '../components/Add.jsx';
 
+
 function Semesters() {
     const navigate = useNavigate();
-    const [semesters, setSemesters] = useState(["Winter 2025 (Sample semester)"]);
+    const [semesters, setSemesters] = useState(() => {
+        const saved = localStorage.getItem("semesters");
+        return saved ? JSON.parse(saved) : ["Winter 2025 (Sample semester)"];
+    }
+    );
+    useEffect(() => {
+        localStorage.setItem("semesters", JSON.stringify(semesters));
+    }, [semesters])
     const [semesterName, setSemesterName] = useState("");
 
-
-
     function handleGoToCourses(semester) {
-
         const semURIName = encodeURIComponent(semester
             .trim()
             .toLowerCase()
@@ -21,7 +26,6 @@ function Semesters() {
         navigate(`/${semURIName}`, { state: { semester } });
         //navigate("/courses", { state: { semester } });
     }
-
     return (
         <div className="semestersPage">
             <Add setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />

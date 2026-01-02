@@ -16,7 +16,7 @@ function Courses() {
     return (
         <div className="coursesPage">
             <Add setItems={setcourses} itemName={courseName} setItemName={setcourseName} />
-            <h2>{state.semester}</h2 >
+            <h2>Semester name:{state.semester}</h2 >
             <button onClick={handleBackToSem}>Back to Semesters</button>
         </div>
 

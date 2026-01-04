@@ -7,14 +7,16 @@ import Items from "../components/Items.jsx"
 function Courses() {
     const { semesterName } = useParams();
     const navigate = useNavigate();
+    const [courseName, setCourseName] = useState("");
+
     const [courses, setCourses] = useState(() => {
-        const saved = localStorage.getItem("courses");
+        const saved = localStorage.getItem(`${semesterName}Courses`);
         return saved ? JSON.parse(saved) : [];
     }
     );
-    const [courseName, setCourseName] = useState("");
+
     useEffect(() => {
-        localStorage.setItem("courses", JSON.stringify(courses));
+        localStorage.setItem(`${semesterName}Courses`, JSON.stringify(courses));
     }, [courses])
 
     //functions

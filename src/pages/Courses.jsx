@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import { useParams, useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
+
 function Courses() {
     const { semesterName } = useParams();
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Courses() {
     }, [courses]);
 
     //functions
-    function handleBackToSem() {
+    function handleBackToSems() {
         navigate("/");
     }
     return (
@@ -29,7 +30,7 @@ function Courses() {
             {<h2>Semester name:{semesterName}</h2 >}
 
             <Items semester={semesterName} course={null} items={courses} />
-            <button onClick={handleBackToSem}>Back to Semesters</button>
+            <button onClick={handleBackToSems}>Back to Semesters</button>
             <button onClick={() => { setCourses([]) }}>Remove All Courses In this Semesters</button>
         </div >
     )

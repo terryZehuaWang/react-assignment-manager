@@ -22,7 +22,11 @@ function Semesters() {
         <div className="semestersPage">
             <Add semester={null} course={null} setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />
             <Items semester={null} course={null} items={semesters} />
-            <button onClick={() => { setSemesters([]) }}>Remove All Semesters</button>
+            <button onClick={() => {
+                localStorage.clear();
+                setSemesters([]);
+
+            }}>Remove All Semesters</button>
         </div >
     )
 }

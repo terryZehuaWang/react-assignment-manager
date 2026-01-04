@@ -25,7 +25,6 @@ function Semesters() {
             <button onClick={() => {
                 localStorage.clear();
                 setSemesters([]);
-
             }}>Remove All Semesters</button>
         </div >
     )

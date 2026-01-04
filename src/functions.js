@@ -17,3 +17,8 @@ export function convertToURI(str_) {
         .toLowerCase()
         .replace(/\s+/g, "-"));
 }
+/*
+export function clearItems(strEnding) {
+    Object.keys(localStorage).filter(k => k.endsWith("strEnding")).forEach(k => localStorage.removeItem(k));
+}
+    */

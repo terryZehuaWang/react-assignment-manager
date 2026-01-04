@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom"
 import { useParams, useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-
 function Courses() {
     const { semesterName } = useParams();
     const navigate = useNavigate();
@@ -17,7 +16,7 @@ function Courses() {
 
     useEffect(() => {
         localStorage.setItem(`${semesterName}Courses`, JSON.stringify(courses));
-    }, [courses])
+    }, [courses]);
 
     //functions
     function handleBackToSem() {
@@ -31,8 +30,8 @@ function Courses() {
 
             <Items semester={semesterName} course={null} items={courses} />
             <button onClick={handleBackToSem}>Back to Semesters</button>
-
-        </div>
+            <button onClick={() => { setCourses([]) }}>Remove All Courses In this Semesters</button>
+        </div >
     )
 }
 

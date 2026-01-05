@@ -15,7 +15,7 @@ function Assignment() {
     });
 
     const [amentName, setAmentName] = useState("");
-    const [amentWeight, setAmentWeight] = useState(0);
+    const [amentWeight, setAmentWeight] = useState();
     //end of useStates
 
     useEffect(() => {
@@ -30,7 +30,8 @@ function Assignment() {
 
     return (
         <div className="amentPage">
-            <Add semester={semesterName} course={courseName} setItems={setAments} itemName={amentName} setItemName={setAmentName} />
+            <Add semester={semesterName} course={courseName} setItems={setAments} itemName={amentName} setItemName={setAmentName}
+                itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
             {<h2>Course name:{courseName}</h2 >}
 

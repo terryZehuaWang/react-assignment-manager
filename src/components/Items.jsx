@@ -23,7 +23,8 @@ function Items({ semester, course, items }) {
                 return (
                     <div key={idx}>
                         <h2 onClick={() => { handleItemClicked(item) }}>
-                            {item.name}</h2>
+                            {item.name}
+                            {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}</h2>
                     </div>
                 );
             })}

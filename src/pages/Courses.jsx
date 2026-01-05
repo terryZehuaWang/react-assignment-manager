@@ -31,7 +31,10 @@ function Courses() {
 
             <Items semester={semesterName} course={null} items={courses} />
             <button onClick={handleBackToSems}>Back to Semesters</button>
-            <button onClick={() => { setCourses([]) }}>Remove All Courses In this Semesters</button>
+            <button onClick={() => {
+                Object.keys(localStorage).filter(k => k.startsWith(`${semesterName}`)).forEach(k => localStorage.removeItem(k))
+                setCourses([]);
+            }}>Remove All Courses In this Semesters</button>
         </div >
     )
 }

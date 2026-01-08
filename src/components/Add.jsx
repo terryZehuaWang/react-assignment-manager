@@ -1,6 +1,6 @@
 
 
-
+import './add.css'
 import { ITEM_TYPE } from "../constants"
 import { handleGetItemType } from "../functions"
 //pass course = {null} if items courses
@@ -35,23 +35,25 @@ function Add({ semester, course, setItems, itemName, setItemName, itemWeight, se
 
     }
     return (
-        <div className="add">
-            <h2>Input {itemType}</h2>
-            <input type="text"
-                value={itemName}
-                onChange={handleItemNameChange} />
-
+        <span className="add">
+            <div className="field">
+                <h2>{itemType} Name:</h2>
+                <input type="text"
+                    value={itemName}
+                    onChange={handleItemNameChange} />
+            </div>
             {itemType == ITEM_TYPE.ASSIGNMENT &&
-                <>
-                    <h2>Input Weight Percentage </h2>
+
+                <div className="field">
+                    <h2>Weight Percentage: </h2>
                     <input value={itemWeight}
                         onChange={handleItemWeightChange} />
                     {/*<h2>Input Deadline 
                     </h2><input/>*/}
-                </>
+                </div>
             }
-            <button onClick={handleAddItem}>Add {itemType}</button>
-        </div>
+            <button className="addButton" onClick={handleAddItem}>Add {itemType}</button>
+        </span>
     )
 }
 

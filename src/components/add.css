@@ -1,0 +1,41 @@
+.add {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+
+    align-items: flex-end;
+    height: 10rem;
+    justify-self: center;
+    border-color: blueviolet;
+
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 20rem;
+
+
+}
+
+.field input {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.field h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    height: 2rem;
+    width: 100%;
+
+
+}
+
+.addButton {
+    height: 4rem;
+}

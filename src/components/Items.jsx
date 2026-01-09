@@ -24,7 +24,10 @@ function Items({ semester, course, items }) {
                     <div className="list" key={idx}>
                         <h2 className="listItem" onClick={() => { handleItemClicked(item) }}>
                             {item.name}
-                            {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}</h2>
+                            {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
+
+                        </h2>
+                        <h2 className="list">-Delete</h2>
                     </div>
                 );
             })}

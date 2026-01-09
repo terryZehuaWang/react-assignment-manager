@@ -5,6 +5,8 @@
 
 }
 
-.listItem {
-    margin: 1rem;
+.list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }

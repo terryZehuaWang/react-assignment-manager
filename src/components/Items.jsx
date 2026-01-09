@@ -1,4 +1,4 @@
-
+import './items.css'
 import { ITEM_TYPE } from "../constants"
 import { handleGetItemType, convertToURI } from "../functions"
 import { useNavigate } from "react-router-dom"
@@ -18,11 +18,11 @@ function Items({ semester, course, items }) {
         navigate(onClickRoute, { state: { item } });
     }
     return (
-        <div className="semesterDisplayBlock">
+        <div className="items">
             {items.map((item, idx) => {
                 return (
-                    <div key={idx}>
-                        <h2 onClick={() => { handleItemClicked(item) }}>
+                    <div className="list" key={idx}>
+                        <h2 className="listItem" onClick={() => { handleItemClicked(item) }}>
                             {item.name}
                             {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}</h2>
                     </div>

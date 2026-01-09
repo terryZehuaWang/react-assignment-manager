@@ -37,7 +37,7 @@ function Add({ semester, course, setItems, itemName, setItemName, itemWeight, se
     return (
         <span className="add">
             <div className="field">
-                <h2>{itemType} Name:</h2>
+                <h2>Enter {itemType} Name:</h2>
                 <input type="text"
                     value={itemName}
                     onChange={handleItemNameChange} />
@@ -45,14 +45,14 @@ function Add({ semester, course, setItems, itemName, setItemName, itemWeight, se
             {itemType == ITEM_TYPE.ASSIGNMENT &&
 
                 <div className="field">
-                    <h2>Weight Percentage: </h2>
+                    <h2>Enter Weight Percentage: </h2>
                     <input value={itemWeight}
                         onChange={handleItemWeightChange} />
                     {/*<h2>Input Deadline 
                     </h2><input/>*/}
                 </div>
             }
-            <button className="addButton" onClick={handleAddItem}>Add {itemType}</button>
+            <button className="addButton" onClick={handleAddItem}>Add </button>
         </span>
     )
 }

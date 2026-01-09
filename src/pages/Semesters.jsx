@@ -1,4 +1,4 @@
-
+import "./pages.css"
 import React, { useEffect, useState } from "react"
 //import { Link } from "react-router-dom"
 //import { useNavigate } from "react-router-dom"
@@ -22,10 +22,13 @@ function Semesters() {
         <div className="semestersPage">
             <Add semester={null} course={null} setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />
             <Items semester={null} course={null} items={semesters} />
-            <button onClick={() => {
-                localStorage.clear();
-                setSemesters([]);
-            }}>Remove All Semesters</button>
+            <div className="buttonList">
+                <button onClick={() => {
+                    localStorage.clear();
+                    setSemesters([]);
+                }}>Remove All Semesters</button>
+            </div>
+
         </div >
     )
 }

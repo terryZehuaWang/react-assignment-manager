@@ -1,3 +1,4 @@
+import "./pages.css"
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useParams, useNavigate } from "react-router-dom"
@@ -25,17 +26,19 @@ function Courses() {
     }
     return (
         <div className="coursesPage">
-            {<h2>Semester name:{semesterName}</h2 >}
+            {/*<h2>Semester name:{semesterName}</h2 >*/}
             <Add semester={semesterName} course={null} setItems={setCourses} itemName={courseName} setItemName={setCourseName} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
 
 
             <Items semester={semesterName} course={null} items={courses} />
-            <button onClick={handleBackToSems}>Back to Semesters</button>
-            <button onClick={() => {
-                Object.keys(localStorage).filter(k => k.startsWith(`${semesterName}`)).forEach(k => localStorage.removeItem(k))
-                setCourses([]);
-            }}>Remove All Courses In this Semesters</button>
+            <div className="buttonList">
+                <button onClick={handleBackToSems}>Back to Semesters</button>
+                <button onClick={() => {
+                    Object.keys(localStorage).filter(k => k.startsWith(`${semesterName}`)).forEach(k => localStorage.removeItem(k))
+                    setCourses([]);
+                }}>Remove All Courses In this Semesters</button>
+            </div>
         </div >
     )
 }

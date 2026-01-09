@@ -1,3 +1,4 @@
+import "./pages.css"
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -30,14 +31,16 @@ function Assignment() {
 
     return (
         <div className="amentPage">
-            {<h2>Course name:{courseName}</h2 >}
+            {/*<h2>Course name:{courseName}</h2 >*/}
             <Add semester={semesterName} course={courseName} setItems={setAments} itemName={amentName} setItemName={setAmentName}
                 itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
             <Items semester={semesterName} course={courseName} items={aments} />
-            <button onClick={handleBackToSems}>Back to Semesters</button>
-            <button onClick={handleBackToCourses}>Back to Courses</button>
-            <button onClick={() => { setAments([]) }}>Remove All Assignments In this Course</button>
+            <div className="buttonList">
+                <button onClick={handleBackToSems}>Back to Semesters</button>
+                <button onClick={handleBackToCourses}>Back to Courses</button>
+                <button onClick={() => { setAments([]) }}>Remove All Assignments In this Course</button>
+            </div>
         </div >
     )
 }

@@ -3,3 +3,5 @@ export const ITEM_TYPE = {
     COURSE: "Course",
     ASSIGNMENT: "Assignment",
 };
+
+export const SEMESTERS_KEY = "semesters";

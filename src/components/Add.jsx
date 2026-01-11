@@ -2,12 +2,12 @@
 
 import './add.css'
 import { ITEM_TYPE } from "../constants"
-import { handleGetItemType } from "../functions"
-//pass course = {null} if items courses
-//pass semester, course = {null} if items are semesters
+import { handleGetItemType, handleGetSlug } from "../functions"
+//pass courseSLugName = {null} if items courses
+//pass semesterSlugName, courseSLugName = {null} if items are semesters
 //itemWeight, setItemWeight can be undefined if items are not assignments
-function Add({ semester, course, setItems, itemName, setItemName, itemWeight, setItemWeight }) {
-    const itemType = handleGetItemType(semester, course);
+function Add({ semesterSlugName, courseSLugName, setItems, itemName, setItemName, itemWeight, setItemWeight }) {
+    const itemType = handleGetItemType(semesterSlugName, courseSLugName);
     function handleItemNameChange(event) {
         setItemName(event.target.value);
     }
@@ -20,17 +20,15 @@ function Add({ semester, course, setItems, itemName, setItemName, itemWeight, se
 
     function handleAddItem() {
 
-        let newObj;
+        const newObj = {
+            id: crypto.randomUUID(),
+            name: itemName,
+            slugName: handleGetSlug(itemName),
+        };
         if (itemType == ITEM_TYPE.ASSIGNMENT) {
-            newObj = {
-                name: itemName,
-                weight: itemWeight,
-                //deadline: null
-            }
-        } else {
-            newObj = { name: itemName };
+            newObj.weight = itemWeight;
+            //deadline: null
         }
-
         setItems((prevItems) => [...prevItems, newObj]);
 
     }

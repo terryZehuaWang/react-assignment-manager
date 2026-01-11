@@ -1,4 +1,5 @@
-import { ITEM_TYPE } from "./constants";
+import { ITEM_TYPE, SEMESTERS_KEY } from "./constants";
+import Assignment from "./pages/Assignments";
 
 export function handleGetItemType(semester, course) {
     let itemType;
@@ -11,12 +12,61 @@ export function handleGetItemType(semester, course) {
     return itemType;
 }
 
-export function convertToURI(str_) {
+export function handleGetSlug(str_) {
     return encodeURIComponent(str_
         .trim()
         .toLowerCase()
         .replace(/\s+/g, "-"));
 }
+
+export function handleGetItemsIdFromKey(key) {
+    const itemsSaved = localStorage.getItem(key);
+    //console.assert(itemsSaved, "items list does not exist in local storage when trying to find itemId");
+    const items = itemsSaved ? JSON.parse(itemsSaved) : [];
+    return items;
+}
+export function handleFindSemesterIdFromSlug(semesterSlug) {
+    const semesters = handleGetItemsIdFromKey(SEMESTERS_KEY);
+    const semester = semesters.find(s => s.slugName === semesterSlug);
+    const semesterId = semester?.id;
+    return semesterId;
+}
+
+export function handleFindCourseIdFromSlug(coursesKey, courseSlug) {
+    const courses = handleGetItemsIdFromKey(coursesKey);
+    const course = courses.find(c => c.slugName === courseSlug);
+    const courseId = course?.id;
+    return courseId;
+}
+
+//pass courseSlug as null if items is a list of assignment
+export function handleGenItemsKey(semesterSlug, courseSlug) {
+    const itemType = handleGetItemType(semesterSlug, courseSlug);
+
+    if ((itemType) === ITEM_TYPE.SEMESTER) {
+        return SEMESTERS_KEY;
+    }
+    const semesterId = handleFindSemesterIdFromSlug(semesterSlug);
+    const coursesKey = `sem-${semesterId}-courses`;
+    if (itemType === ITEM_TYPE.COURSE) {
+        return coursesKey;
+    }
+    //itemType === ITEM_TYPE.ASSIGNMENT
+    const courseId = handleFindCourseIdFromSlug(coursesKey, courseSlug);
+    const assignmentsKey = `sem-${semesterId}-course-${courseId}-assignments`;
+    return assignmentsKey;
+}
+
+
+export function handlePrintAllKeys() {
+    Object.keys(localStorage).forEach(k => console.log(k));;
+}
+
+
+
+
+
+
 /*
 export function clearItems(strEnding) {
     Object.keys(localStorage).filter(k => k.endsWith("strEnding")).forEach(k => localStorage.removeItem(k));

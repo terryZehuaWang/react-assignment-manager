@@ -4,38 +4,40 @@ import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-import { convertToURI } from "../functions"
+import { handleGetSlug, handleGenItemsKey } from "../functions"
 
 function Assignment() {
     const navigate = useNavigate();
-    const { semesterName, courseName } = useParams();
+    const { semesterSlugName, courseSlugName } = useParams();
     //useStates
+    amentsKey = handleGenItemsKey(semesterSlugName, courseSlugName);
     const [aments, setAments] = useState(() => {
-        const saved = localStorage.getItem(`${semesterName}${courseName}Assignments`);
+
+        const saved = localStorage.getItem(amentsKey);
         return saved ? JSON.parse(saved) : [];
     });
 
     const [amentName, setAmentName] = useState("");
-    const [amentWeight, setAmentWeight] = useState();
+    const [amentWeight, setAmentWeight] = useState("");
     //end of useStates
 
     useEffect(() => {
-        localStorage.setItem(`${semesterName}${courseName}Assignments`, JSON.stringify(aments));
+        localStorage.setItem(amentsKey, JSON.stringify(aments));
     }, [aments]);
     function handleBackToSems() {
         navigate("/");
     }
     function handleBackToCourses() {
-        navigate(`/semester/${convertToURI(semesterName)}`);
+        navigate(`/semester/${handleGetSlug(semesterSlugName)}`);
     }
 
     return (
         <div className="amentPage">
             {/*<h2>Course name:{courseName}</h2 >*/}
-            <Add semester={semesterName} course={courseName} setItems={setAments} itemName={amentName} setItemName={setAmentName}
+            <Add semesterSlugName={semesterSlugName} courseSLugName={courseSlugName} setItems={setAments} itemName={amentName} setItemName={setAmentName}
                 itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
-            <Items semester={semesterName} course={courseName} items={aments} />
+            <Items semesterSlugName={semesterSlugName} courseSlugName={courseSlugName} items={aments} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={handleBackToCourses}>Back to Courses</button>

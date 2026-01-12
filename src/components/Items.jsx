@@ -1,19 +1,23 @@
 import './items.css'
 import { ITEM_TYPE } from "../constants"
-import { handleGetItemType } from "../functions"
+import { handleMakeIdSlugToken, handleGetItemType } from "../functions"
 import { useNavigate } from "react-router-dom"
+
 //pass courseSlugName = {null} if item is a course 
 //pass semesterSlugName = {null} and courseSlugName = {null} if item is a semester
-function Items({ semesterSlugName, courseSlugName, items }) {
-    const itemType = handleGetItemType(semesterSlugName, courseSlugName);
+function Items({ parentSemesterToken, parentCourseToken, items }) {
+    const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
     const navigate = useNavigate();
+    //functions
     function handleItemClicked(item) {
         if (itemType == ITEM_TYPE.ASSIGNMENT) return;
         let onClickRoute;
         if (itemType == ITEM_TYPE.SEMESTER) {
-            onClickRoute = `/semester/${item.slugName}`;
-        } else {
-            onClickRoute = `/semester/${semesterSlugName}/course/${item.slugName}`;
+            //const clickedSemesterToken = handleMakeIdSlugToken(item.id, item.slugName);
+            onClickRoute = `/semester/${item.token}`;
+        } else { //itemType == ITEM_TYPE.COURSE
+            //clickedCourseToken = handleMakeIdSlugToken(item.id, item.slugName);
+            onClickRoute = `/semester/${parentSemesterToken}/course/${item.token}`;
         }
         navigate(onClickRoute, { state: { item } });
     }

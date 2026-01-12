@@ -6,13 +6,12 @@ import { Routes, Route } from "react-router-dom"
 
 function App() {
 
-
   return (
     <div>
       <Routes>
         <Route path="/" element={<Semesters />} />
-        <Route path="/semester/:semesterSlugName" element={<Courses />} />
-        <Route path="/semester/:semesterSlugName/course/:courseSlugName" element={<Assignments />} />
+        <Route path="/semester/:parentSemesterToken" element={<Courses />} />
+        <Route path="/semester/:parentSemesterToken/course/:parentCourseToken" element={<Assignments />} />
       </Routes>
 
     </div>

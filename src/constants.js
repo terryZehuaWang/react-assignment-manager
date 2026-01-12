@@ -4,4 +4,5 @@ export const ITEM_TYPE = {
     ASSIGNMENT: "Assignment",
 };
 
+
 export const SEMESTERS_KEY = "semesters";

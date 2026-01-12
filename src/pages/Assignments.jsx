@@ -4,13 +4,19 @@ import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-import { handleGetSlug, handleGenItemsKey } from "../functions"
+import { handleMakeIdSlugToken, handleGetIdFromToken } from "../functions"
 
 function Assignment() {
     const navigate = useNavigate();
-    const { semesterSlugName, courseSlugName } = useParams();
+    const { parentSemesterToken, parentCourseToken } = useParams();
+    const parentSemesterId = handleGetIdFromToken(parentSemesterToken);
+    const parentCourseId = handleGetIdFromToken(parentCourseToken);
+
     //useStates
-    amentsKey = handleGenItemsKey(semesterSlugName, courseSlugName);
+    //console.log(`semester ID: ${parentSemesterId}`);
+    //console.log(`course ID: ${parentCourseId}`);
+
+    const amentsKey = `sem-${parentSemesterId}-course-${parentCourseId}-assignments`;
     const [aments, setAments] = useState(() => {
 
         const saved = localStorage.getItem(amentsKey);
@@ -28,16 +34,16 @@ function Assignment() {
         navigate("/");
     }
     function handleBackToCourses() {
-        navigate(`/semester/${handleGetSlug(semesterSlugName)}`);
+        navigate(`/semester/${parentSemesterToken}`);
     }
 
     return (
         <div className="amentPage">
             {/*<h2>Course name:{courseName}</h2 >*/}
-            <Add semesterSlugName={semesterSlugName} courseSLugName={courseSlugName} setItems={setAments} itemName={amentName} setItemName={setAmentName}
+            <Add parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} setItems={setAments} itemName={amentName} setItemName={setAmentName}
                 itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
-            <Items semesterSlugName={semesterSlugName} courseSlugName={courseSlugName} items={aments} />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} items={aments} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={handleBackToCourses}>Back to Courses</button>

@@ -1,11 +1,11 @@
 import { ITEM_TYPE, SEMESTERS_KEY } from "./constants";
 import Assignment from "./pages/Assignments";
 
-export function handleGetItemType(semester, course) {
+export function handleGetItemType(parentSemesterToken, parentCourseToken) {
     let itemType;
-    if (semester == null && course == null)
+    if (parentSemesterToken == undefined && parentCourseToken == undefined)
         itemType = ITEM_TYPE.SEMESTER;
-    else if (course == null)
+    else if (parentCourseToken == undefined)
         itemType = ITEM_TYPE.COURSE;
     else
         itemType = ITEM_TYPE.ASSIGNMENT;
@@ -19,12 +19,21 @@ export function handleGetSlug(str_) {
         .replace(/\s+/g, "-"));
 }
 
+
+export function handleMakeIdSlugToken(id, slug) {
+    return `${id}~${slug}`;
+}
+
+export function handleGetIdFromToken(token) {
+    return token.split("~")[0];
+}
+
 export function handleGetItemsIdFromKey(key) {
     const itemsSaved = localStorage.getItem(key);
-    //console.assert(itemsSaved, "items list does not exist in local storage when trying to find itemId");
     const items = itemsSaved ? JSON.parse(itemsSaved) : [];
     return items;
 }
+/*
 export function handleFindSemesterIdFromSlug(semesterSlug) {
     const semesters = handleGetItemsIdFromKey(SEMESTERS_KEY);
     const semester = semesters.find(s => s.slugName === semesterSlug);
@@ -38,8 +47,9 @@ export function handleFindCourseIdFromSlug(coursesKey, courseSlug) {
     const courseId = course?.id;
     return courseId;
 }
-
+*/
 //pass courseSlug as null if items is a list of assignment
+/*
 export function handleGenItemsKey(semesterSlug, courseSlug) {
     const itemType = handleGetItemType(semesterSlug, courseSlug);
 
@@ -56,6 +66,7 @@ export function handleGenItemsKey(semesterSlug, courseSlug) {
     const assignmentsKey = `sem-${semesterId}-course-${courseId}-assignments`;
     return assignmentsKey;
 }
+    */
 
 
 export function handlePrintAllKeys() {

@@ -24,6 +24,9 @@ function Add({ parentSemesterToken, parentCourseToken, setItems, itemName, setIt
             id: crypto.randomUUID(),
             name: itemName,
             slugName: handleGetSlug(itemName),
+            itemType: itemType,
+            parentType: undefined,
+            parentParentType: undefined,
 
         };
         newObj.token = handleMakeIdSlugToken(newObj.id, newObj.slugName);

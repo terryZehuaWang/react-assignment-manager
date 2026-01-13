@@ -1,11 +1,11 @@
 import { ITEM_TYPE, SEMESTERS_KEY } from "./constants";
-import Assignment from "./pages/Assignments";
 
-export function handleGetItemType(parentSemesterToken, parentCourseToken) {
+
+export function handleGetItemType(parentSemester, parentCourse) {
     let itemType;
-    if (parentSemesterToken == undefined && parentCourseToken == undefined)
+    if (parentSemester == undefined && parentCourse == undefined)
         itemType = ITEM_TYPE.SEMESTER;
-    else if (parentCourseToken == undefined)
+    else if (parentCourse == undefined)
         itemType = ITEM_TYPE.COURSE;
     else
         itemType = ITEM_TYPE.ASSIGNMENT;
@@ -33,41 +33,49 @@ export function handleGetItemsIdFromKey(key) {
     const items = itemsSaved ? JSON.parse(itemsSaved) : [];
     return items;
 }
-/*
-export function handleFindSemesterIdFromSlug(semesterSlug) {
-    const semesters = handleGetItemsIdFromKey(SEMESTERS_KEY);
-    const semester = semesters.find(s => s.slugName === semesterSlug);
-    const semesterId = semester?.id;
-    return semesterId;
+
+export function handleGetorGenCoursesKey(parentSemesterId) {
+    return `sem-${parentSemesterId}-courses`;
+}
+export function handleGetorGenAmentsKey(parentSemesterId, parentCourseId) {
+    return `sem-${parentSemesterId}-course-${parentCourseId}-assignments`;
 }
 
-export function handleFindCourseIdFromSlug(coursesKey, courseSlug) {
-    const courses = handleGetItemsIdFromKey(coursesKey);
-    const course = courses.find(c => c.slugName === courseSlug);
-    const courseId = course?.id;
-    return courseId;
+export function handleDeleteItem(itemToDelete, semesterId, courseId) {
+    handleDeleteAllChildren(semesterId, courseId, itemToDelete);
+    setItems((prevItems) => prevItems.filter(item => item.id !== itemToDelete.id));
 }
-*/
-//pass courseSlug as null if items is a list of assignment
-/*
-export function handleGenItemsKey(semesterSlug, courseSlug) {
-    const itemType = handleGetItemType(semesterSlug, courseSlug);
 
-    if ((itemType) === ITEM_TYPE.SEMESTER) {
-        return SEMESTERS_KEY;
+export function handleDeleteAllChildren(semesterId, courseId, item) {
+    const itemType = item.itemType;
+    if (itemType == ITEM_TYPE.ASSIGNMENT) {
+        return;
     }
-    const semesterId = handleFindSemesterIdFromSlug(semesterSlug);
-    const coursesKey = `sem-${semesterId}-courses`;
+    if (itemType === ITEM_TYPE.SEMESTER)
+        handleDeleteAllKeysStartWith(`sem-${semesterId}`);
     if (itemType === ITEM_TYPE.COURSE) {
-        return coursesKey;
+        handleDeleteAllKeysStartWith(`sem-${`sem-${semesterId}-course-${courseId}-assignments`}`);
     }
-    //itemType === ITEM_TYPE.ASSIGNMENT
-    const courseId = handleFindCourseIdFromSlug(coursesKey, courseSlug);
-    const assignmentsKey = `sem-${semesterId}-course-${courseId}-assignments`;
-    return assignmentsKey;
 }
-    */
+export function handleDeleteAllKeysStartWith(keyStartWith) {
+    Object.keys(localStorage).filter(k => k.startsWith(keyStartWith)).forEach(k => localStorage.removeItem(k));
+}
 
+
+/*
+`sem-${parentSemesterId}-courses`
+export function handleGetItemDirectChildIds(parentId, itemType) {
+    let ChildIds = [];
+    for 
+    return ChildIds;
+}
+
+export function GetDirectChildIdsFromIdsList(parentIds) {
+
+}
+
+export function 
+*/
 
 export function handlePrintAllKeys() {
     Object.keys(localStorage).forEach(k => console.log(k));;
@@ -76,10 +84,3 @@ export function handlePrintAllKeys() {
 
 
 
-
-
-/*
-export function clearItems(strEnding) {
-    Object.keys(localStorage).filter(k => k.endsWith("strEnding")).forEach(k => localStorage.removeItem(k));
-}
-    */

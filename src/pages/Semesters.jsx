@@ -22,7 +22,7 @@ function Semesters() {
     return (
         <div className="semestersPage">
             <Add semesterSlugName={null} courseSLugName={null} setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />
-            <Items semesterSlugName={null} courseSlugName={null} items={semesters} />
+            <Items semesterSlugName={null} courseSlugName={null} items={semesters} setItems={setSemesters} />
             <div className="buttonList">
                 <button onClick={() => {
                     localStorage.clear();

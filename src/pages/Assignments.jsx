@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-import { handleMakeIdSlugToken, handleGetIdFromToken } from "../functions"
+import { handleGetIdFromToken, handleGetorGenAmentsKey } from "../functions"
 
 function Assignment() {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Assignment() {
     //console.log(`semester ID: ${parentSemesterId}`);
     //console.log(`course ID: ${parentCourseId}`);
 
-    const amentsKey = `sem-${parentSemesterId}-course-${parentCourseId}-assignments`;
+    const amentsKey = handleGetorGenAmentsKey(parentSemesterId, parentCourseId);
     const [aments, setAments] = useState(() => {
 
         const saved = localStorage.getItem(amentsKey);
@@ -43,7 +43,7 @@ function Assignment() {
             <Add parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} setItems={setAments} itemName={amentName} setItemName={setAmentName}
                 itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
-            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} items={aments} />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} items={aments} setItems={setAments} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={handleBackToCourses}>Back to Courses</button>

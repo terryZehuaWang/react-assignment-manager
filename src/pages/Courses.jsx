@@ -4,13 +4,13 @@ import { useLocation } from "react-router-dom"
 import { useParams, useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-import { handleGetIdFromToken, handlePrintAllKeys } from "../functions.js"
+import { handleGetIdFromToken, handleGetorGenCoursesKey, handlePrintAllKeys } from "../functions.js"
 
 function Courses() {
     const { parentSemesterToken } = useParams();
     //console.log(parentSemesterToken);
     const parentSemesterId = handleGetIdFromToken(parentSemesterToken);
-    const coursesKey = `sem-${parentSemesterId}-courses`;
+    const coursesKey = handleGetorGenCoursesKey(parentSemesterId);
     const navigate = useNavigate();
     const [courseName, setCourseName] = useState("");
     //console.log(semesterId);
@@ -38,7 +38,7 @@ function Courses() {
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
 
 
-            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={() => {

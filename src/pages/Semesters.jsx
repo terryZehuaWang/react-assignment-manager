@@ -11,7 +11,7 @@ function Semesters() {
     //const navigate = useNavigate();
     const [semesters, setSemesters] = useState(() => {
         const saved = localStorage.getItem("semesters");
-        return saved ? JSON.parse(saved) : [""];
+        return saved ? JSON.parse(saved) : [];
     }
     );
     const [semesterName, setSemesterName] = useState("");

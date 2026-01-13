@@ -36,7 +36,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                             {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
 
                         </h2>
-                        <h2 className="list" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>-Delete</h2>
+                        <button className="list" id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>-Delete</button>
                     </div>
                 );
             })}

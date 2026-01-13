@@ -25,13 +25,13 @@ function Add({ parentSemesterToken, parentCourseToken, setItems, itemName, setIt
             name: itemName,
             slugName: handleGetSlug(itemName),
             itemType: itemType,
-            parentType: undefined,
-            parentParentType: undefined,
 
         };
+
         newObj.token = handleMakeIdSlugToken(newObj.id, newObj.slugName);
         if (itemType == ITEM_TYPE.ASSIGNMENT) {
             newObj.weight = itemWeight;
+
             //deadline: null
         }
         setItems((prevItems) => [...prevItems, newObj]);

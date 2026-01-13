@@ -25,6 +25,9 @@ export function handleMakeIdSlugToken(id, slug) {
 }
 
 export function handleGetIdFromToken(token) {
+    if (token === undefined) {
+        return token;
+    }
     return token.split("~")[0];
 }
 
@@ -41,20 +44,16 @@ export function handleGetorGenAmentsKey(parentSemesterId, parentCourseId) {
     return `sem-${parentSemesterId}-course-${parentCourseId}-assignments`;
 }
 
-export function handleDeleteItem(itemToDelete, semesterId, courseId) {
-    handleDeleteAllChildren(semesterId, courseId, itemToDelete);
-    setItems((prevItems) => prevItems.filter(item => item.id !== itemToDelete.id));
-}
 
-export function handleDeleteAllChildren(semesterId, courseId, item) {
+export function handleDeleteAllChildren(item, parentSemesterId) {
     const itemType = item.itemType;
     if (itemType == ITEM_TYPE.ASSIGNMENT) {
         return;
     }
     if (itemType === ITEM_TYPE.SEMESTER)
-        handleDeleteAllKeysStartWith(`sem-${semesterId}`);
+        handleDeleteAllKeysStartWith(`sem-${item.id}-`);
     if (itemType === ITEM_TYPE.COURSE) {
-        handleDeleteAllKeysStartWith(`sem-${`sem-${semesterId}-course-${courseId}-assignments`}`);
+        localStorage.removeItem(`${`sem-${parentSemesterId}-course-${item.id}-assignments`}`);
     }
 }
 export function handleDeleteAllKeysStartWith(keyStartWith) {

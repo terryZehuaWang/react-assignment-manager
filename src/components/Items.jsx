@@ -1,12 +1,14 @@
 import './items.css'
 import { ITEM_TYPE } from "../constants"
-import { handleGetItemType, handleDeleteAllChildren } from "../functions"
+import { handleGetItemType, handleDeleteAllChildren, handleGetIdFromToken } from "../functions"
 import { useNavigate } from "react-router-dom"
 
 //pass courseSlugName = {null} if item is a course 
 //pass semesterSlugName = {null} and courseSlugName = {null} if item is a semester
 function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
+    let parentSemesterId = handleGetIdFromToken(parentSemesterToken);
+    let parentCourseId = handleGetIdFromToken(parentCourseToken);
     const navigate = useNavigate();
     //functions
     function handleItemClicked(item) {
@@ -20,8 +22,8 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
         }
         navigate(onClickRoute, { state: { item } });
     }
-    function handleDeleteItem(itemToDelete, semesterId, courseId) {
-        handleDeleteAllChildren(semesterId, courseId, itemToDelete);
+    function handleDeleteItem(itemToDelete, parentSemesterId) {
+        handleDeleteAllChildren(itemToDelete, parentSemesterId);
         setItems((prevItems) => prevItems.filter(item => item.id !== itemToDelete.id));
     }
     return (
@@ -34,7 +36,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                             {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
 
                         </h2>
-                        <h2 className="list" onClick={() => { handleDeleteItem(item) }}>-Delete</h2>
+                        <h2 className="list" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>-Delete</h2>
                     </div>
                 );
             })}

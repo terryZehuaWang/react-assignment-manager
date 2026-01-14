@@ -2,15 +2,17 @@ import './items.css'
 import { ITEM_TYPE } from "../constants"
 import { handleGetItemType, handleDeleteAllChildren, handleGetIdFromToken } from "../functions"
 import { useNavigate } from "react-router-dom"
+import { useState } from 'react'
 
 //pass courseSlugName = {null} if item is a course 
 //pass semesterSlugName = {null} and courseSlugName = {null} if item is a semester
-function Items({ parentSemesterToken, parentCourseToken, items, setItems, itemName, setItemName, itemWeight, setItemWeight }) {
+function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
+    const [itemName, setItemName] = useState("");
+    const [itemWeight, setItemWeight] = useState("");
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
 
     let parentSemesterId = handleGetIdFromToken(parentSemesterToken);
     let parentCourseId = handleGetIdFromToken(parentCourseToken);
-
     const navigate = useNavigate();
 
     //functions
@@ -44,7 +46,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems, itemNa
         setItems(prevItems =>
             prevItems.map(item =>
                 item.id === id
-                    ? { ...item, name: itemWeight }
+                    ? { ...item, weight: itemWeight }
                     : item
             )
         );
@@ -71,12 +73,9 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems, itemNa
         );
     }
     function handleConfirmEdit(item) {
-        console.log(item.name);
         handleRenameItem(item);
-        console.log(item.name);
         itemType === ITEM_TYPE.ASSIGNMENT && handleReweightItem(item);
         handleEditModeOff(item);
-        console.log(item.name);
     }
 
 

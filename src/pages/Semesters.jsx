@@ -14,17 +14,18 @@ function Semesters() {
         return saved ? JSON.parse(saved) : [];
     }
     );
-    const [semesterName, setSemesterName] = useState("");
+
     useEffect(() => {
         localStorage.setItem(SEMESTERS_KEY, JSON.stringify(semesters));
     }, [semesters])
 
     return (
         <div className="semestersPage">
-            <Add semesterSlugName={undefined} courseSLugName={undefined} setItems={setSemesters} itemName={semesterName} setItemName={setSemesterName} />
+            <Add semesterSlugName={undefined} courseSLugName={undefined} setItems={setSemesters} />
             <Items semesterSlugName={undefined} courseSlugName={undefined} items={semesters} setItems={setSemesters}
-                itemName={semesterName} setItemName={setSemesterName}
+
             />
+
             <div className="buttonList">
                 <button onClick={() => {
                     localStorage.clear();

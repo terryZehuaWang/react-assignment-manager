@@ -12,7 +12,6 @@ function Courses() {
     const parentSemesterId = handleGetIdFromToken(parentSemesterToken);
     const coursesKey = handleGetorGenCoursesKey(parentSemesterId);
     const navigate = useNavigate();
-    const [courseName, setCourseName] = useState("");
     //console.log(semesterId);
     // handlePrintAllKeys();
     const [courses, setCourses] = useState(() => {
@@ -34,12 +33,12 @@ function Courses() {
     return (
         <div className="coursesPage">
             {/*<h2>Semester name:{semesterName}</h2 >*/}
-            <Add parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} setItems={setCourses} itemName={courseName} setItemName={setCourseName} />
+            <Add parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} setItems={setCourses} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
 
 
             <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses}
-                itemName={courseName} setItemName={setCourseName}
+
             />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>

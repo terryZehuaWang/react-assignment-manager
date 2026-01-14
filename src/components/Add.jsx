@@ -8,15 +8,9 @@ import { handleGetItemType, handleGetSlug, handleMakeIdSlugToken } from "../func
 //itemWeight, setItemWeight can be undefined if items are not assignments
 function Add({ parentSemesterToken, parentCourseToken, setItems, itemName, setItemName, itemWeight, setItemWeight }) {
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
-    function handleItemNameChange(event) {
-        setItemName(event.target.value);
-    }
-    function handleItemWeightChange(event) {
-        setItemWeight(event.target.value);
-    }
-    function handleItemDeadlineChange(event) {
-        //setItemDeadline(event.target.value);
-    }
+
+
+
 
     function handleAddItem() {
 
@@ -44,14 +38,14 @@ function Add({ parentSemesterToken, parentCourseToken, setItems, itemName, setIt
                 <h2>Enter {itemType} Name:</h2>
                 <input type="text"
                     value={itemName}
-                    onChange={handleItemNameChange} />
+                    onChange={(e) => setItemName(e.target.value)} />
             </div>
             {itemType == ITEM_TYPE.ASSIGNMENT &&
 
                 <div className="field">
                     <h2>Enter Weight Percentage: </h2>
                     <input value={itemWeight}
-                        onChange={handleItemWeightChange} />
+                        onChange={(e) => setItemWeight(e.target.value)} />
                     {/*<h2>Input Deadline 
                     </h2><input/>*/}
                 </div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 //pass courseSlugName = {null} if item is a course 
 //pass semesterSlugName = {null} and courseSlugName = {null} if item is a semester
-function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
+function Items({ parentSemesterToken, parentCourseToken, items, setItems, itemName, setItemName, itemWeight, setItemWeight }) {
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
 
     let parentSemesterId = handleGetIdFromToken(parentSemesterToken);
@@ -29,11 +29,22 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
         handleDeleteAllChildren(itemToDelete, parentSemesterId);
         setItems((prevItems) => prevItems.filter(item => item.id !== itemToDelete.id));
     }
-    function handleRenameItem(id, newName) {
+    function handleRenameItem(item) {
+        const id = item.id;
         setItems(prevItems =>
             prevItems.map(item =>
                 item.id === id
-                    ? { ...item, name: newName }
+                    ? { ...item, name: itemName }
+                    : item
+            )
+        );
+    }
+    function handleReweightItem(item) {
+        const id = item.id;
+        setItems(prevItems =>
+            prevItems.map(item =>
+                item.id === id
+                    ? { ...item, name: itemWeight }
                     : item
             )
         );
@@ -47,7 +58,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                     : item
             )
         );
-        console.log(item);
+
     }
     function handleEditModeOff(item) {
         const id = item.id;
@@ -59,17 +70,13 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
             )
         );
     }
-    function handleConfirmEdit(item,) {
-        /*
-        const id = item.id;
-        setItems(prevItems =>
-            prevItems.map(item =>
-                item.id === id
-                    ? { ...item, name: false }
-                    : item
-            )
-        );
-        */
+    function handleConfirmEdit(item) {
+        console.log(item.name);
+        handleRenameItem(item);
+        console.log(item.name);
+        itemType === ITEM_TYPE.ASSIGNMENT && handleReweightItem(item);
+        handleEditModeOff(item);
+        console.log(item.name);
     }
 
 
@@ -93,8 +100,14 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                         {item.editMode && (
                             <div>
                                 <h2>New Name</h2>
-                                <input type="text" onClick={() => handleRenameItem(item)} />
-                                <button onClick={() => handleEditModeOff(item)}>Confirm</button>
+                                <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} />
+                                {(itemType === ITEM_TYPE.ASSIGNMENT) &&
+                                    <div>
+                                        <h2>New Weight</h2>
+                                        <input type="text" value={itemWeight} onChange={(e) => setItemWeight(e.target.value)} />
+                                    </div>
+                                }
+                                <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
                                 <button onClick={() => handleEditModeOff(item)}>Cancel</button>
                             </div>
                         )}

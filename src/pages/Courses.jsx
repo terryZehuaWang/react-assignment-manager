@@ -38,7 +38,9 @@ function Courses() {
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
 
 
-            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses} />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses}
+                itemName={courseName} setItemName={setCourseName}
+            />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={() => {

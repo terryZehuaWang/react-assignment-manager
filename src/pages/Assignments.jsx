@@ -43,7 +43,8 @@ function Assignment() {
             <Add parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} setItems={setAments} itemName={amentName} setItemName={setAmentName}
                 itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             {/*<h2>Semester name:{state.semester.name}</h2 >*/}
-            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} items={aments} setItems={setAments} />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={parentCourseToken} items={aments} setItems={setAments}
+                itemName={amentName} setItemName={setAmentName} itemWeight={amentWeight} setItemWeight={setAmentWeight} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={handleBackToCourses}>Back to Courses</button>

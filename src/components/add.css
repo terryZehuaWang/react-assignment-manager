@@ -3,7 +3,7 @@
     flex-direction: row;
     height: 7rem;
     width: 50rem;
-
+    align-items: flex-end;
     justify-self: center;
     gap: 1rem;
     margin-bottom: 1rem;

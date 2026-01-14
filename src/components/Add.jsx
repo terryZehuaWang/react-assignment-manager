@@ -25,6 +25,7 @@ function Add({ parentSemesterToken, parentCourseToken, setItems, itemName, setIt
             name: itemName,
             slugName: handleGetSlug(itemName),
             itemType: itemType,
+            editMode: false,
 
         };
 

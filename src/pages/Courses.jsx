@@ -8,14 +8,10 @@ import { handleGetIdFromToken, handleGetorGenCoursesKey, handlePrintAllKeys } fr
 
 function Courses() {
     const { parentSemesterToken } = useParams();
-    //console.log(parentSemesterToken);
     const parentSemesterId = handleGetIdFromToken(parentSemesterToken);
     const coursesKey = handleGetorGenCoursesKey(parentSemesterId);
     const navigate = useNavigate();
-    //console.log(semesterId);
-    // handlePrintAllKeys();
     const [courses, setCourses] = useState(() => {
-        //const saved = localStorage.getItem(`${semesterName}Courses`);
         const saved = localStorage.getItem(coursesKey);
         return saved ? JSON.parse(saved) : [];
     }
@@ -32,14 +28,8 @@ function Courses() {
     }
     return (
         <div className="coursesPage">
-            {/*<h2>Semester name:{semesterName}</h2 >*/}
             <Add parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} setItems={setCourses} />
-            {/*<h2>Semester name:{state.semester.name}</h2 >*/}
-
-
-            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses}
-
-            />
+            <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses} />
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={() => {

@@ -1,6 +1,6 @@
 import './items.css'
 import { ITEM_TYPE } from "../constants"
-import { handleGetItemType, handleDeleteAllChildren, handleGetIdFromToken } from "../functions"
+import { handleGetItemType, handleDeleteAllChildren, handleGetIdFromToken, handleGetSlug, handleMakeIdSlugToken } from "../functions"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 
@@ -30,17 +30,17 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
         handleDeleteAllChildren(itemToDelete, parentSemesterId);
         setItems((prevItems) => prevItems.filter(item => item.id !== itemToDelete.id));
     }
-    function handleRenameItem(item) {
+    function handleUpdateNameSlugToken(item) {
         const id = item.id;
         setItems(prevItems =>
             prevItems.map(item =>
                 item.id === id
-                    ? { ...item, name: itemName }
+                    ? { ...item, name: itemName, slugName: handleGetSlug(itemName), token: handleMakeIdSlugToken(item.id, handleGetSlug(itemName)) }
                     : item
             )
         );
     }
-    function handleReweightItem(item) {
+    function handleUpdateWeight(item) {
         const id = item.id;
         setItems(prevItems =>
             prevItems.map(item =>
@@ -51,8 +51,8 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
         );
     }
     function handleConfirmEdit(item) {
-        handleRenameItem(item);
-        itemType === ITEM_TYPE.ASSIGNMENT && handleReweightItem(item);
+        handleUpdateNameSlugToken(item);
+        itemType === ITEM_TYPE.ASSIGNMENT && handleUpdateWeight(item);
         setEditingId("");
     }
 

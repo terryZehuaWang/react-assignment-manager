@@ -8,7 +8,6 @@ import Items from "../components/Items.jsx";
 
 
 function Semesters() {
-    //const navigate = useNavigate();
     const [semesters, setSemesters] = useState(() => {
         const saved = localStorage.getItem("semesters");
         return saved ? JSON.parse(saved) : [];

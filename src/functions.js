@@ -61,20 +61,6 @@ export function handleDeleteAllKeysStartWith(keyStartWith) {
 }
 
 
-/*
-`sem-${parentSemesterId}-courses`
-export function handleGetItemDirectChildIds(parentId, itemType) {
-    let ChildIds = [];
-    for 
-    return ChildIds;
-}
-
-export function GetDirectChildIdsFromIdsList(parentIds) {
-
-}
-
-export function 
-*/
 
 export function handlePrintAllKeys() {
     Object.keys(localStorage).forEach(k => console.log(k));;

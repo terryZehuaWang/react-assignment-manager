@@ -9,12 +9,11 @@ import { useState } from 'react'
 function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
     const [itemName, setItemName] = useState("");
     const [itemWeight, setItemWeight] = useState("");
+    const [editingId, setEditingId] = useState(null);
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
-
     let parentSemesterId = handleGetIdFromToken(parentSemesterToken);
     let parentCourseId = handleGetIdFromToken(parentCourseToken);
     const navigate = useNavigate();
-
     //functions
     function handleItemClicked(item) {
         if (itemType == ITEM_TYPE.ASSIGNMENT) return;
@@ -51,31 +50,10 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
             )
         );
     }
-    function handleEditModeOn(item) {
-        const id = item.id;
-        setItems(prevItems =>
-            prevItems.map(item =>
-                item.id === id
-                    ? { ...item, editMode: true }
-                    : item
-            )
-        );
-
-    }
-    function handleEditModeOff(item) {
-        const id = item.id;
-        setItems(prevItems =>
-            prevItems.map(item =>
-                item.id === id
-                    ? { ...item, editMode: false }
-                    : item
-            )
-        );
-    }
     function handleConfirmEdit(item) {
         handleRenameItem(item);
         itemType === ITEM_TYPE.ASSIGNMENT && handleReweightItem(item);
-        handleEditModeOff(item);
+        setEditingId("");
     }
 
 
@@ -86,7 +64,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                 return (
 
                     <div className="list" key={item.id}>
-                        {!item.editMode && (
+                        {item.id !== editingId && (
                             <div>
                                 <h2 className="listItem" onClick={() => { handleItemClicked(item) }}>
                                     {item.name}
@@ -96,7 +74,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                             </div>
                         )}
 
-                        {item.editMode && (
+                        {item.id === editingId && (
                             <div>
                                 <h2>New Name</h2>
                                 <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} />
@@ -107,14 +85,19 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                                     </div>
                                 }
                                 <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
-                                <button onClick={() => handleEditModeOff(item)}>Cancel</button>
+                                <button onClick={() => setEditingId("")}>Cancel</button>
                             </div>
                         )}
-                        {!item.editMode && (
+                        {item.id !== editingId && (
                             <div>
-                                <button id="editButton" onClick={() => { handleEditModeOn(item) }}>-Edit</button>
+                                <button id="editButton" onClick={() => {
 
-                                <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>-Delete</button>
+                                    setEditingId(item.id);
+
+
+                                }}>Edit</button>
+
+                                <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>
                             </div>
                         )}
                     </div>

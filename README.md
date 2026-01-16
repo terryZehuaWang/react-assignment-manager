@@ -1,16 +1,38 @@
-# React + Vite
+# Assignments Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React web application for managing academic work using a hierarchical structure:
+**Semesters → Courses → Assignments**.
 
-Currently, two official plugins are available:
+## Overview
+This project allows users to create, edit, and manage semesters, courses, and assignments with persistent storage in the browser. Navigation mirrors the data hierarchy, enabling users to drill down from semesters to individual assignments.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+- Hierarchical navigation using React Router
+- Create, edit, and delete semesters, courses, and assignments
+- Inline editing of names and assignment weights
+- Persistent client-side storage using `localStorage`
+- Cascading deletion to remove dependent data when a parent item is deleted
 
-## React Compiler
+## Technical Highlights
+- Implemented reusable CRUD components for adding, listing, editing, and deleting items
+- Designed a rename-tolerant routing approach using UUID-based identifiers combined with URL-friendly slugs
+- Centralized ID handling, storage key generation, and deletion logic into shared helper functions.
+- Used useState to manage UI data and useEffect to synchronize it with localStorage
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Tech Stack
+- React
+- React Router
+- JavaScript (ES6+)
+- Vite
 
-## Expanding the ESLint configuration
+## Project Structure
+- `components/` — reusable UI components (Add, Items)
+- `pages/` — route-level pages (Semesters, Courses, Assignments)
+- `functions.js` — shared helper logic (IDs, slugs, storage keys, deletion)
+- `constants.js` — shared constants and item types
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+```bash
+npm install
+npm run dev
+

@@ -40,6 +40,13 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
             )
         );
     }
+
+    function handleEditButtonClicked(item) {
+        setEditingId(item.id);
+        setItemName(item.name);
+        itemType === ITEM_TYPE.ASSIGNMENT && setItemWeight(item.weight);
+    }
+
     function handleUpdateWeight(item) {
         const id = item.id;
         setItems(prevItems =>
@@ -53,8 +60,9 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
     function handleConfirmEdit(item) {
         handleUpdateNameSlugToken(item);
         itemType === ITEM_TYPE.ASSIGNMENT && handleUpdateWeight(item);
-        setEditingId("");
+        setEditingId(null);
     }
+
 
 
 
@@ -85,16 +93,13 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                                     </div>
                                 }
                                 <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
-                                <button onClick={() => setEditingId("")}>Cancel</button>
+                                <button onClick={() => setEditingId(null)}>Cancel</button>
                             </div>
                         )}
                         {item.id !== editingId && (
                             <div>
                                 <button id="editButton" onClick={() => {
-
-                                    setEditingId(item.id);
-
-
+                                    handleEditButtonClicked(item);
                                 }}>Edit</button>
 
                                 <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>

@@ -9,3 +9,18 @@
 .buttonList button {
     height: 3rem;
 }
+
+.semestersPage {
+    background-color: #f6f9fc;
+    min-height: 100vh;
+}
+
+.coursesPage {
+    background-color: #fefef9;
+    min-height: 100vh;
+}
+
+.amentPage {
+    background-color: #ffffff;
+    min-height: 100vh;
+}

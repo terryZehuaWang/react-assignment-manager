@@ -4,14 +4,26 @@
     align-items: center;
 }
 
+.listLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.7rem;
+    border: 0.2rem solid #d5d4d492;
+    margin: 0.2rem;
+    padding: 0.2rem;
+}
+
 #nonAssignmentInfo:hover {
     color: #689ff1;
     transform: scale(1.05);
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .itemInfo {
     display: flex;
-    flex-direction: row;
     gap: 1rem;
     align-items: center;
 

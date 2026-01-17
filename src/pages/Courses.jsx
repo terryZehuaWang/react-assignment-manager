@@ -16,7 +16,6 @@ function Courses() {
         return saved ? JSON.parse(saved) : [];
     }
     );
-
     useEffect(() => {
 
         localStorage.setItem(coursesKey, JSON.stringify(courses));
@@ -28,6 +27,7 @@ function Courses() {
     }
     return (
         <div className="coursesPage">
+
             <Add parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} setItems={setCourses} />
             <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses} />
             <div className="buttonList">

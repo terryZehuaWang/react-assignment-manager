@@ -68,16 +68,26 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
             {items.map((item) => {
                 return (
 
-                    <div className="list" key={item.id}>
+                    <div key={item.id}>
                         {item.id !== editingId && (
-                            <div>
+                            <div className="listLine" >
                                 <h2 className="itemInfo" id={itemType === ITEM_TYPE.ASSIGNMENT ? "assignmentInfo" : "nonAssignmentInfo"} onClick={() => { handleItemClicked(item) }}>
                                     {item.name}
                                     {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
 
                                 </h2>
+
+                                <div className="actions">
+                                    <button id="editButton" onClick={() => {
+                                        handleEditButtonClicked(item);
+                                    }}>Edit</button>
+
+                                    <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>
+                                </div>
                             </div>
                         )
+
+
                         }
 
                         {
@@ -99,15 +109,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                             )
                         }
                         {
-                            item.id !== editingId && (
-                                <div className="actions">
-                                    <button id="editButton" onClick={() => {
-                                        handleEditButtonClicked(item);
-                                    }}>Edit</button>
 
-                                    <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>
-                                </div>
-                            )
                         }
                     </div>
 

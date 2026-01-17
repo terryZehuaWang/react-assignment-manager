@@ -30,6 +30,7 @@ function Add({ parentSemesterToken, parentCourseToken, setItems }) {
     }
     return (
         <span className="add">
+
             <div className="field">
                 <h2>Enter {itemType} Name:</h2>
                 <input type="text"

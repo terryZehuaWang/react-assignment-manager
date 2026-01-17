@@ -9,7 +9,6 @@ This project allows users to create, edit, and manage semesters, courses, and as
 ## Key Features
 - Hierarchical navigation using React Router
 - Create, edit, and delete semesters, courses, and assignments
-- Inline editing of names and assignment weights
 - Persistent client-side storage using `localStorage`
 - Cascading deletion to remove dependent data when a parent item is deleted
 

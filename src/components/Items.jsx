@@ -63,9 +63,6 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
         setEditingId(null);
     }
 
-
-
-
     return (
         <div className="items">
             {items.map((item) => {
@@ -83,7 +80,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                         )}
 
                         {item.id === editingId && (
-                            <div>
+                            <div className="editing">
                                 <h2>New Name</h2>
                                 <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} />
                                 {(itemType === ITEM_TYPE.ASSIGNMENT) &&
@@ -92,12 +89,14 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                                         <input type="text" value={itemWeight} onChange={(e) => setItemWeight(e.target.value)} />
                                     </div>
                                 }
-                                <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
-                                <button onClick={() => setEditingId(null)}>Cancel</button>
+                                <div className="editingActions">
+                                    <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
+                                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                                </div>
                             </div>
                         )}
                         {item.id !== editingId && (
-                            <div>
+                            <div className="actions">
                                 <button id="editButton" onClick={() => {
                                     handleEditButtonClicked(item);
                                 }}>Edit</button>

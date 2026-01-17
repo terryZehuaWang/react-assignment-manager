@@ -71,46 +71,49 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                     <div className="list" key={item.id}>
                         {item.id !== editingId && (
                             <div>
-                                <h2 className="listItem" onClick={() => { handleItemClicked(item) }}>
+                                <h2 className="itemInfo" id={itemType === ITEM_TYPE.ASSIGNMENT ? "assignmentInfo" : "nonAssignmentInfo"} onClick={() => { handleItemClicked(item) }}>
                                     {item.name}
                                     {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
 
                                 </h2>
                             </div>
-                        )}
+                        )
+                        }
 
-                        {item.id === editingId && (
-                            <div className="editing">
-                                <h2>New Name</h2>
-                                <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} />
-                                {(itemType === ITEM_TYPE.ASSIGNMENT) &&
-                                    <div>
-                                        <h2>New Weight</h2>
-                                        <input type="text" value={itemWeight} onChange={(e) => setItemWeight(e.target.value)} />
+                        {
+                            item.id === editingId && (
+                                <div className="editing">
+                                    <h2>New Name</h2>
+                                    <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} />
+                                    {(itemType === ITEM_TYPE.ASSIGNMENT) &&
+                                        <div>
+                                            <h2>New Weight</h2>
+                                            <input type="text" value={itemWeight} onChange={(e) => setItemWeight(e.target.value)} />
+                                        </div>
+                                    }
+                                    <div className="editingActions">
+                                        <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
+                                        <button onClick={() => setEditingId(null)}>Cancel</button>
                                     </div>
-                                }
-                                <div className="editingActions">
-                                    <button onClick={(e) => handleConfirmEdit(item)}>Confirm</button>
-                                    <button onClick={() => setEditingId(null)}>Cancel</button>
                                 </div>
-                            </div>
-                        )}
-                        {item.id !== editingId && (
-                            <div className="actions">
-                                <button id="editButton" onClick={() => {
-                                    handleEditButtonClicked(item);
-                                }}>Edit</button>
+                            )
+                        }
+                        {
+                            item.id !== editingId && (
+                                <div className="actions">
+                                    <button id="editButton" onClick={() => {
+                                        handleEditButtonClicked(item);
+                                    }}>Edit</button>
 
-                                <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>
-                            </div>
-                        )}
+                                    <button id="deleteButton" onClick={() => { handleDeleteItem(item, parentSemesterId) }}>Delete</button>
+                                </div>
+                            )
+                        }
                     </div>
-
-
 
                 );
             })}
-        </div>
+        </div >
     )
 }
 

@@ -4,11 +4,17 @@
     align-items: center;
 }
 
-.list {
+#nonAssignmentInfo:hover {
+    color: #689ff1;
+    transform: scale(1.05);
+}
+
+.itemInfo {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+
 
 
 }

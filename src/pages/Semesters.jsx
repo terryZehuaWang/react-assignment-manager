@@ -1,8 +1,6 @@
 import "./pages.css"
 import React, { useEffect, useState } from "react"
 import { SEMESTERS_KEY } from "../constants.js";
-//import { Link } from "react-router-dom"
-//import { useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx";
 

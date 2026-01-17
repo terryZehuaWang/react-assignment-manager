@@ -4,8 +4,8 @@ import { handleGetItemType, handleDeleteAllChildren, handleGetIdFromToken, handl
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 
-//pass courseSlugName = {null} if item is a course 
-//pass semesterSlugName = {null} and courseSlugName = {null} if item is a semester
+//pass parentCourseToken = {undefined} if item is a course 
+//pass parentSemesterToken = {undefined} and parentCourseToken = {undefined} if item is a semester
 function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
     const [itemName, setItemName] = useState("");
     const [itemWeight, setItemWeight] = useState("");

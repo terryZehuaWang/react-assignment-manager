@@ -3,9 +3,9 @@ import { ITEM_TYPE, SEMESTERS_KEY } from "./constants";
 
 export function handleGetItemType(parentSemester, parentCourse) {
     let itemType;
-    if (parentSemester == undefined && parentCourse == undefined)
+    if (parentSemester === undefined && parentCourse === undefined)
         itemType = ITEM_TYPE.SEMESTER;
-    else if (parentCourse == undefined)
+    else if (parentCourse === undefined)
         itemType = ITEM_TYPE.COURSE;
     else
         itemType = ITEM_TYPE.ASSIGNMENT;
@@ -47,7 +47,7 @@ export function handleGetorGenAmentsKey(parentSemesterId, parentCourseId) {
 
 export function handleDeleteAllChildren(item, parentSemesterId) {
     const itemType = item.itemType;
-    if (itemType == ITEM_TYPE.ASSIGNMENT) {
+    if (itemType === ITEM_TYPE.ASSIGNMENT) {
         return;
     }
     if (itemType === ITEM_TYPE.SEMESTER)

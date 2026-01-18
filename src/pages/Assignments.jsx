@@ -39,7 +39,7 @@ function Assignment() {
             <div className="buttonList">
                 <button onClick={handleBackToSems}>Back to Semesters</button>
                 <button onClick={handleBackToCourses}>Back to Courses</button>
-                <button onClick={() => { setAments([]) }}>Remove All Assignments In this Course</button>
+                <button onClick={() => { setAments([]) }}>Remove All Assignments in This Course</button>
             </div>
         </div >
     )

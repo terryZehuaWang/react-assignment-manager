@@ -35,7 +35,7 @@ function Courses() {
                 <button onClick={() => {
                     Object.keys(localStorage).filter(k => k.startsWith(`sem-${parentSemesterId}-`)).forEach(k => localStorage.removeItem(k))
                     setCourses([]);
-                }}>Remove All Courses In this Semesters</button>
+                }}>Remove All Courses in This Semesters</button>
             </div>
         </div >
     )

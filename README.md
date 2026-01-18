@@ -3,6 +3,8 @@
 A React web application for managing academic work using a hierarchical structure:
 **Semesters → Courses → Assignments**.
 
+Live Demo: https://react-assignment-manager.vercel.app/
+
 ## Overview
 This project allows users to create, edit, and manage semesters, courses, and assignments with persistent storage in the browser. Navigation mirrors the data hierarchy, enabling users to drill down from semesters to individual assignments.
 
@@ -15,7 +17,7 @@ This project allows users to create, edit, and manage semesters, courses, and as
 ## Technical Highlights
 - Implemented reusable CRUD components for adding, listing, editing, and deleting items
 - Designed a rename-tolerant routing approach using UUID-based identifiers combined with URL-friendly slugs
-- Centralized ID handling, storage key generation, and deletion logic into shared helper functions.
+- Centralized ID handling, storage key generation, and deletion logic into shared helper functions
 - Used useState to manage UI data and useEffect to synchronize it with localStorage
 
 ## Tech Stack

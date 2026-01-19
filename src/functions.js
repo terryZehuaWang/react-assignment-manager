@@ -1,4 +1,4 @@
-import { ITEM_TYPE, SEMESTERS_KEY } from "./constants";
+import { ITEM_TYPE } from "./constants";
 
 
 export function handleGetItemType(parentSemester, parentCourse) {

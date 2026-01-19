@@ -1,10 +1,9 @@
 import "./pages.css"
-import React, { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx"
-import { handleGetIdFromToken, handleGetorGenCoursesKey, handlePrintAllKeys } from "../functions.js"
+import { handleGetIdFromToken, handleGetorGenCoursesKey } from "../functions.js"
 
 function Courses() {
     const { parentSemesterToken } = useParams();
@@ -27,7 +26,6 @@ function Courses() {
     }
     return (
         <div className="coursesPage">
-
             <Add parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} setItems={setCourses} />
             <Items parentSemesterToken={parentSemesterToken} parentCourseToken={undefined} items={courses} setItems={setCourses} />
             <div className="buttonList">

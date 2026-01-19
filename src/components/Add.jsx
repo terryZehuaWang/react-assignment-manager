@@ -1,12 +1,10 @@
-
-
 import './add.css'
 import { ITEM_TYPE } from "../constants"
 import { handleGetItemType, handleGetSlug, handleMakeIdSlugToken } from "../functions"
 import { useState } from 'react';
 
-//pass parentCourseToken = {null} if items courses
-//pass parentSemesterToken, parentCourseToken = {null} if items are semesters
+//pass parentCourseToken = {undefined} if item is a course 
+//pass parentSemesterToken = {undefined} and parentCourseToken = {undefined} if item is a semester
 function Add({ parentSemesterToken, parentCourseToken, setItems }) {
     const itemType = handleGetItemType(parentSemesterToken, parentCourseToken);
     const [itemName, setItemName] = useState("");
@@ -22,11 +20,8 @@ function Add({ parentSemesterToken, parentCourseToken, setItems }) {
         newObj.token = handleMakeIdSlugToken(newObj.id, newObj.slugName);
         if (itemType === ITEM_TYPE.ASSIGNMENT) {
             newObj.weight = itemWeight;
-
-            //deadline: null
         }
         setItems((prevItems) => [...prevItems, newObj]);
-
     }
     return (
         <span className="add">
@@ -49,5 +44,4 @@ function Add({ parentSemesterToken, parentCourseToken, setItems }) {
         </span>
     )
 }
-
 export default Add

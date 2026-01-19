@@ -1,5 +1,5 @@
 import "./pages.css"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { SEMESTERS_KEY } from "../constants.js";
 import Add from '../components/Add.jsx'
 import Items from "../components/Items.jsx";

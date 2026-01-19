@@ -74,9 +74,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                                 <h2 className="itemInfo" id={itemType === ITEM_TYPE.ASSIGNMENT ? "assignmentInfo" : "nonAssignmentInfo"} onClick={() => { handleItemClicked(item) }}>
                                     {item.name}
                                     {itemType == ITEM_TYPE.ASSIGNMENT && (<span> - weight {item.weight}% </span>)}
-
                                 </h2>
-
                                 <div className="actions">
                                     <button id="editButton" onClick={() => {
                                         handleEditButtonClicked(item);
@@ -86,10 +84,7 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                                 </div>
                             </div>
                         )
-
-
                         }
-
                         {
                             item.id === editingId && (
                                 <div className="editing">
@@ -109,10 +104,8 @@ function Items({ parentSemesterToken, parentCourseToken, items, setItems }) {
                             )
                         }
                         {
-
                         }
                     </div>
-
                 );
             })}
         </div >
